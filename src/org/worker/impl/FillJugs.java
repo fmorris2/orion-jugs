@@ -9,7 +9,7 @@ import viking.api.Timing;
 public class FillJugs extends OJWorker
 {
 	private static final int WATER_DIST_THRESH = 7; 
-	private static final long ANIM_THRESH = 600;
+	private static final long ANIM_THRESH = 1200;
 	
 	private long lastAnim;
 	
