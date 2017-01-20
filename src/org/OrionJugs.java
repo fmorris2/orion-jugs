@@ -85,7 +85,7 @@ public class OrionJugs extends Mission implements CapitalMission, ItemManagement
 	public boolean needsCapital()
 	{
 		Map<Integer, Integer> bankCache = script.BANK_CACHE.get();
-		return !bankCache.isEmpty() && !bankCache.containsKey(Jug.EMPTY.ID) && !inventory.contains(Jug.EMPTY.ID);
+		return !bankCache.isEmpty() && !bankCache.containsKey(Jug.EMPTY.ID) && !inventory.contains(Jug.EMPTY.ID, Jug.EMPTY.ID + 1);
 	}
 
 	@Override
