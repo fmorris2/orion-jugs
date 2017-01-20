@@ -1,8 +1,12 @@
 package org.worker.impl;
 
+import java.util.List;
+
 import org.OrionJugs;
-import org.data.Jug;
+import org.osbot.rs07.api.map.Position;
 import org.worker.OJWorker;
+
+import viking.api.Timing;
 
 public class OJ_GoToBank extends OJWorker
 {
@@ -16,8 +20,10 @@ public class OJ_GoToBank extends OJWorker
 	public void work()
 	{
 		script.log(this, false, "Go to bank");
-		walkUtils.walkPath(inventory.onlyContains(Jug.WATER.ID) 
-				? mission.MANAGER.location.REVERSE_BANK_PATH : mission.MANAGER.location.BANK_PATH);
+		List<Position> path = mission.MANAGER.location.REVERSE_BANK_PATH;
+		if(walkUtils.walkPath(path) || walkUtils.walkTo(path.get(path.size() - 1)))
+			Timing.waitCondition(() -> bankUtils.isInBank(false), 5000);
+			
 	}
 
 }

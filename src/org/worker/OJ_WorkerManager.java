@@ -5,7 +5,6 @@ import org.data.Jug;
 import org.data.loc.JugLoc;
 import org.data.loc.JugLocation;
 import org.osbot.rs07.script.MethodProvider;
-import org.worker.impl.DepositJugs;
 import org.worker.impl.FillJugs;
 import org.worker.impl.OJ_GoToBank;
 import org.worker.impl.OJ_GoToLocation;
@@ -16,7 +15,6 @@ import viking.framework.worker.WorkerManager;
 
 public class OJ_WorkerManager extends WorkerManager<OrionJugs>
 {
-	public final DepositJugs DEPOSIT_JUGS;
 	public final FillJugs FILL_JUGS;
 	public final OJ_GoToBank GO_TO_BANK;
 	public final WithdrawJugs WITHDRAW_JUGS;
@@ -27,7 +25,6 @@ public class OJ_WorkerManager extends WorkerManager<OrionJugs>
 	public OJ_WorkerManager(OrionJugs mission)
 	{
 		super(mission);
-		DEPOSIT_JUGS = new DepositJugs(mission);
 		FILL_JUGS = new FillJugs(mission);
 		GO_TO_BANK = new OJ_GoToBank(mission);
 		WITHDRAW_JUGS = new WithdrawJugs(mission);
@@ -41,22 +38,16 @@ public class OJ_WorkerManager extends WorkerManager<OrionJugs>
 		final boolean IN_BANK = mission.bankUtils.isInBank(false);
 		final boolean FULL_INV = inventory.isFull();
 		final boolean ONLY_HAS_JUGS = inventory.onlyContains(Jug.EMPTY.ID, Jug.WATER.ID);
-		final boolean FULL_OF_EMPTY = inventory.onlyContains(Jug.EMPTY.ID);
 		
 		if(!location.isIn(myPlayer()))
 			return GO_TO_LOCATION;
-		
-		if(FULL_INV && !FULL_OF_EMPTY)
-		{
-			return IN_BANK ? DEPOSIT_JUGS : GO_TO_BANK;
-		}
-		
+				
 		if(FULL_INV && ONLY_HAS_JUGS)
 		{
 			return FILL_JUGS;
 		}
 		
-		return WITHDRAW_JUGS;
+		return IN_BANK ? WITHDRAW_JUGS : GO_TO_BANK;
 	}
 
 }
