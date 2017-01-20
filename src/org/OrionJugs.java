@@ -17,7 +17,7 @@ import viking.framework.script.VikingScript;
 
 public class OrionJugs extends Mission implements CapitalMission, ItemManagement, MuleManagement
 {	
-	private static final int JUG_PURCHASE_AMT = 5000;
+	private static final int JUG_PURCHASE_AMT = 300;
 	
 	public final OJ_WorkerManager MANAGER;
 	
