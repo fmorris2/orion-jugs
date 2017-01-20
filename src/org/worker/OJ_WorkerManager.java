@@ -38,11 +38,12 @@ public class OJ_WorkerManager extends WorkerManager<OrionJugs>
 		final boolean IN_BANK = mission.bankUtils.isInBank(false);
 		final boolean FULL_INV = inventory.isFull();
 		final boolean ONLY_HAS_JUGS = inventory.onlyContains(Jug.EMPTY.ID, Jug.WATER.ID);
+		final boolean ONLY_HAS_FILLED = inventory.onlyContains(Jug.WATER.ID);
 		
 		if(!location.isIn(myPlayer()))
 			return GO_TO_LOCATION;
 				
-		if(FULL_INV && ONLY_HAS_JUGS)
+		if(FULL_INV && !ONLY_HAS_FILLED && ONLY_HAS_JUGS)
 		{
 			return FILL_JUGS;
 		}
