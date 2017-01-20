@@ -1,5 +1,7 @@
 package org;
 
+import java.util.Map;
+
 import org.data.Jug;
 import org.worker.OJ_WorkerManager;
 
@@ -82,7 +84,8 @@ public class OrionJugs extends Mission implements CapitalMission, ItemManagement
 	@Override
 	public boolean needsCapital()
 	{
-		return false;
+		Map<Integer, Integer> bankCache = script.BANK_CACHE.get();
+		return !bankCache.isEmpty() && !bankCache.containsKey(Jug.EMPTY.ID) && !inventory.contains(Jug.EMPTY.ID);
 	}
 
 	@Override
