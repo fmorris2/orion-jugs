@@ -41,7 +41,7 @@ public class OrionJugs extends Mission implements CapitalMission, ItemManagement
 	@Override
 	public String getCurrentTaskName()
 	{
-		return MANAGER.getCurrent().toString();
+		return MANAGER.getCurrent() == null ? "Starting up..." : MANAGER.getCurrent().toString();
 	}
 
 	@Override
