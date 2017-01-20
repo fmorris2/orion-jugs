@@ -32,8 +32,8 @@ public class FillJugs extends OJWorker
 			RS2Object water = objects.closest(source);
 			if(water != null && myPosition().distance(water.getPosition()) > WATER_DIST_THRESH)
 				walkUtils.walkPath(mission.MANAGER.location.BANK_PATH);
-			else if(iFact.itemOnObj("Jug", source, 10).execute())
-				Timing.waitCondition(() -> myPlayer().isAnimating(), 6500);
+			else if(iFact.itemOnObj("Jug", source, 10).execute() && Timing.waitCondition(() -> myPlayer().isAnimating(), 6500))
+				lastAnim = Timing.currentMs();
 		}
 	}
 
