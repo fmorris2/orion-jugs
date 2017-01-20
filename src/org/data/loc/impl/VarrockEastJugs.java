@@ -25,4 +25,10 @@ public class VarrockEastJugs extends JugLoc
 		return new Position(3247, 3429, 0);
 	}
 
+	@Override
+	protected String waterSource()
+	{
+		return "Fountain";
+	}
+
 }

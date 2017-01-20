@@ -25,4 +25,10 @@ public class FaladorWestJugs extends JugLoc
 		return new Position(2950, 3376, 0);
 	}
 
+	@Override
+	protected String waterSource()
+	{
+		return "Waterpump";
+	}
+
 }

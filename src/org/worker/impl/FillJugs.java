@@ -19,9 +19,11 @@ public class FillJugs extends OJWorker
 	public void work()
 	{
 		script.log(this, false, "Fill Jugs");
-		if(myPlayer().isAnimating())
+		if(bank.isOpen())
+			bank.close();
+		else if(myPlayer().isAnimating())
 			lastAnim = Timing.currentMs();
-		else if(Timing.timeFromMark(lastAnim) > ANIM_THRESH && iFact.itemOnObj("Jug", "Fountain", 20).execute())
+		else if(Timing.timeFromMark(lastAnim) > ANIM_THRESH && iFact.itemOnObj("Jug", mission.MANAGER.location.WATER_SOURCE, 20).execute())
 			Timing.waitCondition(() -> myPlayer().isAnimating(), 6500);
 	}
 
