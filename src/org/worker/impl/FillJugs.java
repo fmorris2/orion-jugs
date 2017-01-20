@@ -9,7 +9,7 @@ import viking.api.Timing;
 public class FillJugs extends OJWorker
 {
 	private static final int WATER_DIST_THRESH = 7; 
-	private static final long ANIM_THRESH = 1200;
+	private static final long ANIM_THRESH = 1800;
 	
 	private long lastAnim;
 	
@@ -30,7 +30,7 @@ public class FillJugs extends OJWorker
 		{
 			String source = mission.MANAGER.location.WATER_SOURCE;
 			RS2Object water = objects.closest(source);
-			if(water != null && myPosition().distance(water.getPosition()) > WATER_DIST_THRESH)
+			if(water != null && myPosition().distance(water.getPosition()) > WATER_DIST_THRESH && !myPlayer().isMoving())
 				walkUtils.walkPath(mission.MANAGER.location.BANK_PATH);
 			else if(iFact.itemOnObj("Jug", source, 10).execute() && Timing.waitCondition(() -> myPlayer().isAnimating(), 6500))
 				lastAnim = Timing.currentMs();
